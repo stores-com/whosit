@@ -100,7 +100,7 @@ describe('Western Order', function() {
 
 // http://en.wikipedia.org/wiki/Personal_name#Lexical_order
 // http://en.wikipedia.org/wiki/Surname#Order_of_names
-// https://github.com/mediocre/whosit/pull/1
+// https://github.com/stores-com/whosit/pull/1
 describe('Lexical Order', function() {
     it('Miller,Shawn', function() {
         const name = whosit.parse('Miller,Shawn');
