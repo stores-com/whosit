@@ -12,8 +12,8 @@
     "name": "whosit",
     "repository": "https://github.com/stores-com/whosit",
     "scripts": {
-        "coveralls": "nyc node --test && nyc report --reporter=text-lcov | coveralls",
-        "test": "node --test"
+        "coveralls": "nyc node --test --test-concurrency=true --test-reporter=spec && nyc report --reporter=text-lcov | coveralls",
+        "test": "node --test --test-concurrency=true --test-reporter=spec"
     },
     "version": "1.3.1"
 }
