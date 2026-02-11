@@ -1,7 +1,7 @@
 # whosit
 
 [![Build Status](https://github.com/stores-com/whosit/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/stores-com/whosit/actions?query=workflow%3Abuild+branch%3Amain)
-[![Coverage Status](https://coveralls.io/repos/github/stores-com/whosit/badge.svg?branch=main)](https://coveralls.io/github/stores-com/whosit?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/stores-com/whosit/badge.svg)](https://coveralls.io/github/stores-com/whosit)
 
 A personal name parser for Node.js: http://en.wikipedia.org/wiki/Personal_name
 
