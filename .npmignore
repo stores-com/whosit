@@ -1,3 +1,5 @@
-.eslint*
-.github/**
+.claude
+.github
 test
+CLAUDE.md
+eslint.config.js

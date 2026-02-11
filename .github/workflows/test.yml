@@ -14,12 +14,12 @@ jobs:
 
     steps:
     - name: Setup Node ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v6
       with:
         node-version: ${{ matrix.node-version }}
 
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v6
 
     - name: Install dependencies
       run: npm install
@@ -28,7 +28,7 @@ jobs:
       run: npx eslint .
 
     - name: Install tools
-      run: npm install -g coveralls nyc
+      run: npm install -g coveralls
 
     - name: Test
       env:
@@ -51,14 +51,14 @@ jobs:
         GH_RUN_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
         SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
         SLACK_CHANNEL=$(echo "#${{ github.event.repository.name }}" | sed 's/\./-/g')
-        
+
         # Set status-specific variables
         if [ "${{ job.status }}" == "success" ]; then
           HEADER_TEXT=":white_check_mark: Tests passed for ${{ github.event.repository.name }}"
         else
           HEADER_TEXT=":x: Tests failed for ${{ github.event.repository.name }}"
         fi
-        
+
         # Send Slack notification
         curl -X POST -H 'Content-type: application/json' \
           --data '{

@@ -1,33 +1,34 @@
-const assert = require('assert');
-const { describe, it } = require('node:test');
-const whosit = require('../lib');
+const assert = require('node:assert');
+const test = require('node:test');
 
-describe('Western Order', function() {
-    it('Shawn', function() {
+const whosit = require('../index');
+
+test('Western Order', { concurrency: true }, async (t) => {
+    t.test('Shawn', () => {
         const name = whosit.parse('Shawn');
         assert.equal(name.first, 'Shawn');
     });
 
-    it('Shawn Miller', function() {
+    t.test('Shawn Miller', () => {
         const name = whosit.parse('Shawn Miller');
         assert.equal(name.first, 'Shawn');
         assert.equal(name.last, 'Miller');
     });
 
-    it(' Shawn  Miller ', function() {
+    t.test(' Shawn  Miller ', () => {
         const name = whosit.parse(' Shawn  Miller ');
         assert.equal(name.first, 'Shawn');
         assert.equal(name.last, 'Miller');
     });
 
-    it('Shawn Michael Miller', function() {
+    t.test('Shawn Michael Miller', () => {
         const name = whosit.parse('Shawn Michael Miller');
         assert.equal(name.first, 'Shawn');
         assert.equal(name.middle, 'Michael');
         assert.equal(name.last, 'Miller');
     });
 
-    it('Mr. Shawn Michael Miller', function() {
+    t.test('Mr. Shawn Michael Miller', () => {
         const name = whosit.parse('Mr. Shawn Michael Miller');
         assert.equal(name.salutation, 'Mr.');
         assert.equal(name.first, 'Shawn');
@@ -35,7 +36,7 @@ describe('Western Order', function() {
         assert.equal(name.last, 'Miller');
     });
 
-    it('Shawn Michael Miller Sr', function() {
+    t.test('Shawn Michael Miller Sr', () => {
         const name = whosit.parse('Shawn Michael Miller Sr');
         assert.equal(name.first, 'Shawn');
         assert.equal(name.middle, 'Michael');
@@ -43,7 +44,7 @@ describe('Western Order', function() {
         assert.equal(name.suffix, 'Sr');
     });
 
-    it('Mr. Shawn Michael Miller Sr.', function() {
+    t.test('Mr. Shawn Michael Miller Sr.', () => {
         const name = whosit.parse('Mr. Shawn Michael Miller Sr.');
         assert.equal(name.salutation, 'Mr.');
         assert.equal(name.first, 'Shawn');
@@ -52,44 +53,44 @@ describe('Western Order', function() {
         assert.equal(name.suffix, 'Sr.');
     });
 
-    it('Mister Rogers', function() {
+    t.test('Mister Rogers', () => {
         const name = whosit.parse('Mister Rogers');
         assert.equal(name.salutation, 'Mister');
         assert.equal(name.last, 'Rogers');
     });
 
-    it('Doctor Who', function() {
+    t.test('Doctor Who', () => {
         const name = whosit.parse('Doctor Who');
         assert.equal(name.salutation, 'Doctor');
         assert.equal(name.last, 'Who');
     });
 
-    it('Dr. Dre', function() {
+    t.test('Dr. Dre', () => {
         const name = whosit.parse('Dr. Dre');
         assert.equal(name.salutation, 'Dr.');
         assert.equal(name.last, 'Dre');
     });
 
-    it('Prof. Plum', function() {
+    t.test('Prof. Plum', () => {
         const name = whosit.parse('Prof. Plum');
         assert.equal(name.salutation, 'Prof.');
         assert.equal(name.last, 'Plum');
     });
 
-    it('Professor Plum', function() {
+    t.test('Professor Plum', () => {
         const name = whosit.parse('Professor Plum');
         assert.equal(name.salutation, 'Professor');
         assert.equal(name.last, 'Plum');
     });
 
-    it('Robert Griffin III', function() {
+    t.test('Robert Griffin III', () => {
         const name = whosit.parse('Robert Griffin III');
         assert.equal(name.first, 'Robert');
         assert.equal(name.last, 'Griffin');
         assert.equal(name.suffix, 'III');
     });
 
-    it('Robert Lee Griffin III', function() {
+    t.test('Robert Lee Griffin III', () => {
         const name = whosit.parse('Robert Lee Griffin III');
         assert.equal(name.first, 'Robert');
         assert.equal(name.middle, 'Lee');
@@ -101,41 +102,41 @@ describe('Western Order', function() {
 // http://en.wikipedia.org/wiki/Personal_name#Lexical_order
 // http://en.wikipedia.org/wiki/Surname#Order_of_names
 // https://github.com/stores-com/whosit/pull/1
-describe('Lexical Order', function() {
-    it('Miller,Shawn', function() {
+test('Lexical Order', { concurrency: true }, async (t) => {
+    t.test('Miller,Shawn', () => {
         const name = whosit.parse('Miller,Shawn');
         assert.equal(name.first, 'Shawn');
         assert.equal(name.last, 'Miller');
     });
 
-    it('Miller, Shawn', function() {
+    t.test('Miller, Shawn', () => {
         const name = whosit.parse('Miller, Shawn');
         assert.equal(name.first, 'Shawn');
         assert.equal(name.last, 'Miller');
     });
 
-    it('Miller, Shawn, Prof.', function() {
+    t.test('Miller, Shawn, Prof.', () => {
         const name = whosit.parse('Miller, Shawn, Prof.');
         assert.equal(name.salutation, 'Prof.');
         assert.equal(name.first, 'Shawn');
         assert.equal(name.last, 'Miller');
     });
 
-    it('Miller,Shawn Michael', function() {
+    t.test('Miller,Shawn Michael', () => {
         const name = whosit.parse('Miller,Shawn Michael');
         assert.equal(name.first, 'Shawn');
         assert.equal(name.middle, 'Michael');
         assert.equal(name.last, 'Miller');
     });
 
-    it('Miller, Shawn Michael', function() {
+    t.test('Miller, Shawn Michael', () => {
         const name = whosit.parse('Miller, Shawn Michael');
         assert.equal(name.first, 'Shawn');
         assert.equal(name.middle, 'Michael');
         assert.equal(name.last, 'Miller');
     });
 
-    it('Miller, Shawn Michael, Prof.', function() {
+    t.test('Miller, Shawn Michael, Prof.', () => {
         const name = whosit.parse('Miller, Shawn Michael, Prof.');
         assert.equal(name.salutation, 'Prof.');
         assert.equal(name.first, 'Shawn');
@@ -144,14 +145,14 @@ describe('Lexical Order', function() {
     });
 });
 
-describe('Edge Cases', function() {
-    it('null', function() {
+test('Edge Cases', { concurrency: true }, async (t) => {
+    t.test('null', () => {
         const name = whosit.parse(null);
         assert(name);
         assert.strictEqual(Object.keys(name).length, 0);
     });
 
-    it('undefined', function() {
+    t.test('undefined', () => {
         let name = whosit.parse();
         assert(name);
         assert.strictEqual(Object.keys(name).length, 0);
@@ -161,7 +162,7 @@ describe('Edge Cases', function() {
         assert.strictEqual(Object.keys(name).length, 0);
     });
 
-    it('empty string', function() {
+    t.test('empty string', () => {
         let name = whosit.parse('');
         assert(name);
         assert.strictEqual(Object.keys(name).length, 0);
@@ -171,7 +172,7 @@ describe('Edge Cases', function() {
         assert.strictEqual(Object.keys(name).length, 0);
     });
 
-    it('single comma', function() {
+    t.test('single comma', () => {
         let name = whosit.parse(',');
         assert(name);
         assert.strictEqual(Object.keys(name).length, 0);
@@ -182,80 +183,94 @@ describe('Edge Cases', function() {
     });
 });
 
-describe('Complex Surnames', function() {
-    it('Michael O Connor', function() {
+test('Complex Surnames', { concurrency: true }, async (t) => {
+    t.test('Michael O Connor', () => {
         const name = whosit.parse('Michael O Connor');
         assert.equal(name.first, 'Michael');
         assert.equal(name.middle, 'O');
         assert.equal(name.last, 'Connor');
     });
-    it('Michael O. Connor', function() {
+
+    t.test('Michael O. Connor', () => {
         const name = whosit.parse('Michael O. Connor');
         assert.equal(name.first, 'Michael');
         assert.equal(name.middle, 'O.');
         assert.equal(name.last, 'Connor');
     });
-    it('Michael O\'Connor', function() {
+
+    t.test('Michael O\'Connor', () => {
         const name = whosit.parse('Michael O\'Connor');
         assert.equal(name.first, 'Michael');
         assert.equal(name.last, 'O\'Connor');
     });
-    it('Michael Ó Conchúir', function() {
+
+    t.test('Michael Ó Conchúir', () => {
         const name = whosit.parse('Michael Ó Conchúir');
         assert.equal(name.first, 'Michael');
         assert.equal(name.last, 'Ó Conchúir');
     });
-    it('O\'Connor, Michael', function() {
+
+    t.test('O\'Connor, Michael', () => {
         const name = whosit.parse('O\'Connor, Michael');
         assert.equal(name.first, 'Michael');
         assert.equal(name.last, 'O\'Connor');
     });
-    it('Ó Conchúir, Michael', function() {
+
+    t.test('Ó Conchúir, Michael', () => {
         const name = whosit.parse('Ó Conchúir, Michael');
         assert.equal(name.first, 'Michael');
         assert.equal(name.last, 'Ó Conchúir');
     });
-    it('Fintan MacNeill', function() {
+
+    t.test('Fintan MacNeill', () => {
         const name = whosit.parse('Fintan MacNeill');
         assert.equal(name.first, 'Fintan');
         assert.equal(name.last, 'MacNeill');
     });
-    it('Fintan Mac Néill', function() {
+
+    t.test('Fintan Mac Néill', () => {
         const name = whosit.parse('Fintan Mac Néill');
         assert.equal(name.first, 'Fintan');
         assert.equal(name.last, 'Mac Néill');
     });
-    it('MacNeill, Fintan', function() {
+
+    t.test('MacNeill, Fintan', () => {
         const name = whosit.parse('MacNeill, Fintan');
         assert.equal(name.first, 'Fintan');
         assert.equal(name.last, 'MacNeill');
     });
-    it('Mac Néill, Fintan', function() {
+
+    t.test('Mac Néill, Fintan', () => {
         const name = whosit.parse('Mac Néill, Fintan');
         assert.equal(name.first, 'Fintan');
         assert.equal(name.last, 'Mac Néill');
     });
-    it('Joost van der Meer', function() {
+
+    t.test('Joost van der Meer', () => {
         const name = whosit.parse('Joost van der Meer');
         assert.equal(name.first, 'Joost');
         assert.equal(name.last, 'van der Meer');
     });
-    it('van der Meer, Joost', function() {
+
+    t.test('van der Meer, Joost', () => {
         const name = whosit.parse('van der Meer, Joost');
         assert.equal(name.first, 'Joost');
         assert.equal(name.last, 'van der Meer');
     });
-    it('Van Morrison', function() {
+
+    t.test('Van Morrison', () => {
         const name = whosit.parse('Van Morrison');
         assert.equal(name.first, 'Van');
         assert.equal(name.last, 'Morrison');
     });
-    it('Beyoncé Knowles-Carter', function() {
+
+    t.test('Beyoncé Knowles-Carter', () => {
         const name = whosit.parse('Beyoncé Knowles-Carter');
         assert.equal(name.first, 'Beyoncé');
         assert.equal(name.last, 'Knowles-Carter');
     });
-    it('Maria de la Cruz', function() {
+
+    t.test('Maria de la Cruz', () => {
         const name = whosit.parse('Maria de la Cruz');
         assert.equal(name.first, 'Maria');
         assert.equal(name.last, 'de la Cruz');
