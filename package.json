@@ -8,6 +8,7 @@
         "name",
         "parser"
     ],
+    "license": "MIT",
     "name": "whosit",
     "repository": {
         "type": "git",
