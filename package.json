@@ -18,5 +18,5 @@
         "coveralls": "node --test --test-concurrency=true --experimental-test-coverage --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=lcov.info && coveralls < lcov.info",
         "test": "node --test --test-concurrency=true --test-reporter=spec"
     },
-    "version": "1.4.0"
+    "version": "1.4.1"
 }
