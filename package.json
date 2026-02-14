@@ -15,8 +15,9 @@
         "url": "git+https://github.com/stores-com/whosit.git"
     },
     "scripts": {
-        "coveralls": "node --test --test-concurrency=true --experimental-test-coverage --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=lcov.info && coveralls < lcov.info",
-        "test": "node --test --test-concurrency=true --test-reporter=spec"
+        "coveralls": "node --test --experimental-test-coverage --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=lcov.info && coveralls < lcov.info",
+        "test": "node --test --test-reporter=spec",
+        "test:only": "node --test --test-only --test-reporter=spec"
     },
     "version": "2.0.0"
 }
