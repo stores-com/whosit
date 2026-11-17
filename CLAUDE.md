@@ -18,16 +18,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - ESLint is configured with strict rules (single quotes, semicolons, brace style)
 
 ### CI/CD
-The GitHub Actions workflow (`.github/workflows/test.yml`) runs on push, pull request, and manual dispatch. It:
-1. Runs ESLint
-2. Installs dependencies
-3. Runs tests with coverage for Node.js 22.17.0
+The GitHub Actions workflow (`.github/workflows/test.yml`) runs on pull requests, pushes to `main`, and manual dispatch. It:
+1. Installs dependencies
+2. Runs ESLint
+3. Runs tests with coverage on the Node version in its `env` (`NODE_VERSION`) and uploads to Coveralls
 4. Sends Slack notifications on success/failure
 
 ## Architecture
 
 ### Core Module Structure
-The library is a single module (`lib/index.js`) with one main export:
+The library is a single module (`index.js`) with one main export:
 - `parse(value)` - Returns object with: `{ salutation, first, middle, last, suffix }`
 
 ### Key Implementation Details
@@ -53,9 +53,8 @@ Tests are in `test/test.js` and cover:
 ## Important Notes
 
 - **Zero runtime dependencies** - The library is completely standalone
-- **Node.js 22.17.0** is the tested version in CI
 - **ESLint flat config** is used (`eslint.config.js`)
-- When modifying the parser, ensure all 39 existing tests pass
-- The regex pattern for token extraction is: `/([^\W]+[.]?|,)/gu`
+- When modifying the parser, ensure all existing tests pass
+- Tokens are whitespace-separated: `value.match(/\S+/g)`, after `lexicalToWestern` has turned "Last, First" into Western order
 - Case-insensitive lookups are used for all name component recognition
 - **YAML files** - Always alphabetize keys where possible for consistency and readability
